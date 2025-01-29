@@ -522,7 +522,7 @@ services:
         target: /etc/nginx/nginx.conf
     depends_on:
       - web
-      - relay:
+      - relay
   relay:
     <<: *restart_policy
     image: "$RELAY_IMAGE"
