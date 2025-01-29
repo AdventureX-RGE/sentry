@@ -1,0 +1,1435 @@
+▶ Parsing command line ...
+
+▶ Detecting Docker platform
+Detected Docker platform is linux/arm64
+
+▶ Initializing Docker Compose ...
+
+▶ Setting up error handling ...
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 292B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/debian:bookworm-slim
+#2 DONE 1.4s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [1/2] FROM docker.io/library/debian:bookworm-slim@sha256:f70dc8d6a8b6a06824c92471a1a258030836b26b043881358b967bf73de7c5ab
+#4 DONE 0.0s
+
+#5 [2/2] RUN set -x   && apt-get update   && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends jq   && apt-get clean   && rm -rf /var/lib/apt/lists/*
+#5 CACHED
+
+#6 exporting to image
+#6 exporting layers done
+#6 writing image sha256:54d2c93f7b55e3c1a4343842b22dbf12caa1531c2d81c4cc5a9177b22ccb107a done
+#6 naming to docker.io/library/sentry-self-hosted-jq-local done
+#6 DONE 0.0s
+
+Hey, so ... we would love to automatically find out about issues with your
+Sentry instance so that we can improve the product. Turns out there is an app
+for that, called Sentry. Would you be willing to let us automatically send data
+about your instance upstream to Sentry for development and debugging purposes?
+
+  y / yes / 1
+  n / no / 0
+
+(Btw, we send this to our own self-hosted Sentry instance, not to Sentry SaaS,
+so that we can be in this together.)
+
+Here's the info we may collect:
+
+  - OS username
+  - IP address
+  - install log
+  - runtime errors
+  - performance data
+
+Thirty (30) day retention. No marketing. Privacy policy at sentry.io/privacy.
+
+y or n? 
+Understood. To avoid this prompt in the future, use one of these flags:
+
+  --report-self-hosted-issues
+  --no-report-self-hosted-issues
+
+or set the REPORT_SELF_HOSTED_ISSUES environment variable:
+
+  REPORT_SELF_HOSTED_ISSUES=1 to send data
+  REPORT_SELF_HOSTED_ISSUES=0 to not send data
+
+
+▶ Checking for latest commit ... 
+skipped
+
+▶ Checking minimum requirements ...
+Found Docker version 27.5.1
+Found Docker Compose version 2.32.4
+
+▶ Upgrading Clickhouse ...
+ Container sentry-self-hosted-clickhouse-1  Running
+sentry-self-hosted-clickhouse-1   clickhouse-self-hosted-local   "/entrypoint.sh"   clickhouse   11 minutes ago   Up 2 minutes (healthy)   8123/tcp, 9000/tcp, 9009/tcp
+Detected clickhouse version 23.8.11.29.altinitystable. Skipping upgrades!
+
+▶ Turning things off ...
+ Container sentry-self-hosted-snuba-api-1  Stopping
+ Container sentry-self-hosted-memcached-1  Stopping
+ Container sentry-self-hosted-postgres-1  Stopping
+ Container sentry-self-hosted-symbolicator-1  Stopping
+ Container sentry-self-hosted-smtp-1  Stopping
+ Container sentry-self-hosted-smtp-1  Stopped
+ Container sentry-self-hosted-smtp-1  Removing
+ Container sentry-self-hosted-smtp-1  Removed
+ Container sentry-self-hosted-postgres-1  Stopped
+ Container sentry-self-hosted-postgres-1  Removing
+ Container sentry-self-hosted-postgres-1  Removed
+ Container sentry-self-hosted-memcached-1  Stopped
+ Container sentry-self-hosted-memcached-1  Removing
+ Container sentry-self-hosted-memcached-1  Removed
+ Container sentry-self-hosted-snuba-api-1  Stopped
+ Container sentry-self-hosted-snuba-api-1  Removing
+ Container sentry-self-hosted-snuba-api-1  Removed
+ Container sentry-self-hosted-kafka-1  Stopping
+ Container sentry-self-hosted-clickhouse-1  Stopping
+ Container sentry-self-hosted-redis-1  Stopping
+ Container sentry-self-hosted-redis-1  Stopped
+ Container sentry-self-hosted-redis-1  Removing
+ Container sentry-self-hosted-redis-1  Removed
+ Container sentry-self-hosted-kafka-1  Stopped
+ Container sentry-self-hosted-kafka-1  Removing
+ Container sentry-self-hosted-kafka-1  Removed
+ Container sentry-self-hosted-clickhouse-1  Stopped
+ Container sentry-self-hosted-clickhouse-1  Removing
+ Container sentry-self-hosted-clickhouse-1  Removed
+ Container sentry-self-hosted-symbolicator-1  Stopped
+ Container sentry-self-hosted-symbolicator-1  Removing
+ Container sentry-self-hosted-symbolicator-1  Removed
+ Image vroom-cleanup-self-hosted-local:latest  Removing
+ Image sentry-cleanup-self-hosted-local:latest  Removing
+ Image clickhouse-self-hosted-local:latest  Removing
+ Image symbolicator-cleanup-self-hosted-local:latest  Removing
+ Image sentry-self-hosted-local:latest  Removing
+ Network sentry-self-hosted_default  Removing
+ Image vroom-cleanup-self-hosted-local:latest  Removed
+ Image symbolicator-cleanup-self-hosted-local:latest  Removed
+ Image clickhouse-self-hosted-local:latest  Removed
+ Image sentry-self-hosted-local:latest  Removed
+ Image sentry-cleanup-self-hosted-local:latest  Removed
+ Network sentry-self-hosted_default  Removed
+
+▶ Ensuring Kafka and Zookeeper volumes have correct permissions ...
+
+▶ Creating volumes for persistent storage ...
+Created sentry-clickhouse.
+Created sentry-data.
+Created sentry-kafka.
+Created sentry-postgres.
+Created sentry-redis.
+Created sentry-symbolicator.
+
+▶ Ensuring files from examples ...
+sentry/sentry.conf.py already exists, skipped creation.
+sentry/config.yml already exists, skipped creation.
+symbolicator/config.yml already exists, skipped creation.
+
+▶ Checking memcached backend ...
+PyMemcacheCache found in sentry/sentry.conf.py, gonna assume you're good.
+
+▶ Ensuring Relay credentials ...
+relay/config.yml already exists, skipped creation.
+relay/credentials.json already exists, skipped creation.
+
+▶ Generating secret key ...
+
+▶ Fetching and updating Docker images ...
+ generic-metrics-consumer Skipped - Image is already being pulled by subscription-consumer-transactions 
+ monitors-clock-tasks Skipped - Image is already being pulled by subscription-consumer-transactions 
+ monitors-clock-tick Skipped - Image is already being pulled by subscription-consumer-transactions 
+ post-process-forwarder-issue-platform Skipped - Image is already being pulled by subscription-consumer-transactions 
+ snuba-generic-metrics-gauges-consumer Pulling 
+ symbolicator-cleanup Pulling 
+ geoipupdate Pulling 
+ ingest-profiles Skipped - Image is already being pulled by subscription-consumer-transactions 
+ snuba-metrics-consumer Skipped - Image is already being pulled by snuba-generic-metrics-gauges-consumer 
+ snuba-api Skipped - Image is already being pulled by snuba-generic-metrics-gauges-consumer 
+ kafka Pulling 
+ smtp Pulling 
+ subscription-consumer-transactions Pulling 
+ web Skipped - Image is already being pulled by subscription-consumer-transactions 
+ snuba-subscription-consumer-events Skipped - Image is already being pulled by snuba-generic-metrics-gauges-consumer 
+ snuba-replays-consumer Skipped - Image is already being pulled by snuba-generic-metrics-gauges-consumer 
+ ingest-feedback-events Skipped - Image is already being pulled by subscription-consumer-transactions 
+ snuba-errors-consumer Skipped - Image is already being pulled by snuba-generic-metrics-gauges-consumer 
+ snuba-group-attributes-consumer Skipped - Image is already being pulled by snuba-generic-metrics-gauges-consumer 
+ ingest-monitors Skipped - Image is already being pulled by subscription-consumer-transactions 
+ snuba-generic-metrics-counters-consumer Skipped - Image is already being pulled by snuba-generic-metrics-gauges-consumer 
+ post-process-forwarder-transactions Skipped - Image is already being pulled by subscription-consumer-transactions 
+ ingest-occurrences Skipped - Image is already being pulled by subscription-consumer-transactions 
+ subscription-consumer-events Skipped - Image is already being pulled by subscription-consumer-transactions 
+ snuba-profiling-profiles-consumer Skipped - Image is already being pulled by snuba-generic-metrics-gauges-consumer 
+ snuba-outcomes-consumer Skipped - Image is already being pulled by snuba-generic-metrics-gauges-consumer 
+ events-consumer Skipped - Image is already being pulled by subscription-consumer-transactions 
+ snuba-issue-occurrence-consumer Skipped - Image is already being pulled by snuba-generic-metrics-gauges-consumer 
+ snuba-subscription-consumer-metrics Skipped - Image is already being pulled by snuba-generic-metrics-gauges-consumer 
+ subscription-consumer-generic-metrics Skipped - Image is already being pulled by subscription-consumer-transactions 
+ postgres Pulling 
+ metrics-consumer Skipped - Image is already being pulled by subscription-consumer-transactions 
+ transactions-consumer Skipped - Image is already being pulled by subscription-consumer-transactions 
+ snuba-spans-consumer Skipped - Image is already being pulled by snuba-generic-metrics-gauges-consumer 
+ snuba-profiling-functions-consumer Skipped - Image is already being pulled by snuba-generic-metrics-gauges-consumer 
+ ingest-replay-recordings Skipped - Image is already being pulled by subscription-consumer-transactions 
+ snuba-outcomes-billing-consumer Skipped - Image is already being pulled by snuba-generic-metrics-gauges-consumer 
+ snuba-replacer Skipped - Image is already being pulled by snuba-generic-metrics-gauges-consumer 
+ attachments-consumer Skipped - Image is already being pulled by subscription-consumer-transactions 
+ billing-metrics-consumer Skipped - Image is already being pulled by subscription-consumer-transactions 
+ worker Skipped - Image is already being pulled by subscription-consumer-transactions 
+ subscription-consumer-metrics Skipped - Image is already being pulled by subscription-consumer-transactions 
+ snuba-generic-metrics-distributions-consumer Skipped - Image is already being pulled by snuba-generic-metrics-gauges-consumer 
+ relay Pulling 
+ memcached Pulling 
+ sentry-cleanup Pulling 
+ symbolicator Pulling 
+ vroom Pulling 
+ vroom-cleanup Pulling 
+ redis Pulling 
+ clickhouse Pulling 
+ snuba-subscription-consumer-transactions Skipped - Image is already being pulled by snuba-generic-metrics-gauges-consumer 
+ cron Skipped - Image is already being pulled by subscription-consumer-transactions 
+ snuba-generic-metrics-sets-consumer Skipped - Image is already being pulled by snuba-generic-metrics-gauges-consumer 
+ snuba-transactions-consumer Skipped - Image is already being pulled by snuba-generic-metrics-gauges-consumer 
+ post-process-forwarder-errors Skipped - Image is already being pulled by subscription-consumer-transactions 
+ nginx Pulling 
+ geoipupdate Pulled 
+ smtp Pulled 
+ vroom Pulled 
+ symbolicator Pulled 
+ snuba-generic-metrics-gauges-consumer Pulled 
+ redis Pulled 
+ nginx Pulled 
+ memcached Pulled 
+ postgres Pulled 
+ kafka Pulled 
+ relay Pulled 
+WARNING: Some service image(s) must be built from source by running:
+    docker compose build vroom-cleanup clickhouse sentry-cleanup subscription-consumer-transactions symbolicator-cleanup
+24.11.0: Pulling from sentry-arm/sentry
+Digest: sha256:94969f591c25da2f56d78af909870aa7b2a995d6b295035b833a506c9754cb67
+Status: Image is up to date for ghcr.io/sentry-arm/sentry:24.11.0
+ghcr.io/sentry-arm/sentry:24.11.0
+
+▶ Building and tagging Docker images ...
+
+#0 building with "default" instance using docker driver
+
+#1 [web internal] load build definition from Dockerfile
+#1 transferring dockerfile: 462B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG ${SENTRY_IMAGE} results in empty or invalid base image name (line 2)
+#1 DONE 0.0s
+
+#2 [web internal] load metadata for ghcr.io/sentry-arm/sentry:24.11.0
+#2 DONE 0.0s
+
+#3 [web internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [web 1/4] FROM ghcr.io/sentry-arm/sentry:24.11.0
+#4 DONE 0.0s
+
+#5 [web internal] load build context
+#5 transferring context: 297B done
+#5 DONE 0.0s
+
+#6 [web 2/4] COPY . /usr/src/sentry
+#6 CACHED
+
+#7 [web 3/4] RUN if [ -s /usr/src/sentry/enhance-image.sh ]; then     /usr/src/sentry/enhance-image.sh; fi
+#7 CACHED
+
+#8 [web 4/4] RUN if [ -s /usr/src/sentry/requirements.txt ]; then     echo "sentry/requirements.txt is deprecated, use sentry/enhance-image.sh - see https://develop.sentry.dev/self-hosted/#enhance-sentry-image";     pip install -r /usr/src/sentry/requirements.txt; fi
+#8 CACHED
+
+#9 [web] exporting to image
+#9 exporting layers done
+#9 writing image sha256:3175b14472c6dcb10fcec44c4721aa2176455279b80adc98c85ea8c47daef357 done
+#9 naming to docker.io/library/sentry-self-hosted-local done
+#9 DONE 0.0s
+
+#10 [web] resolving provenance for metadata file
+#10 DONE 0.0s
+ web  Built
+#0 building with "default" instance using docker driver
+
+#1 [clickhouse internal] load build definition from Dockerfile
+#1 transferring dockerfile: 71B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG ${BASE_IMAGE} results in empty or invalid base image name (line 2)
+#1 DONE 0.0s
+
+#2 [clickhouse internal] load metadata for docker.io/altinity/clickhouse-server:23.8.11.29.altinitystable
+#2 DONE 1.5s
+
+#3 [clickhouse internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [clickhouse 1/1] FROM docker.io/altinity/clickhouse-server:23.8.11.29.altinitystable@sha256:a91987eab83bdc8fa5ee9725694b2bcf57779e68fa3934291cd20020484dd391
+#4 CACHED
+
+#5 [clickhouse] exporting to image
+#5 exporting layers done
+#5 writing image sha256:7bf0413391adce540f152937f015d6a0e423cf7e809f262b38eb9d637b8bd996 done
+#5 naming to docker.io/library/clickhouse-self-hosted-local done
+#5 DONE 0.0s
+
+#6 [clickhouse] resolving provenance for metadata file
+#6 DONE 0.0s
+ clickhouse  Built
+#0 building with "default" instance using docker driver
+
+#1 [monitors-clock-tick internal] load build definition from Dockerfile
+#1 transferring dockerfile: 462B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG ${SENTRY_IMAGE} results in empty or invalid base image name (line 2)
+#1 DONE 0.0s
+
+#2 [monitors-clock-tick internal] load metadata for ghcr.io/sentry-arm/sentry:24.11.0
+#2 DONE 0.0s
+
+#3 [monitors-clock-tick internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [monitors-clock-tick 1/4] FROM ghcr.io/sentry-arm/sentry:24.11.0
+#4 DONE 0.0s
+
+#5 [monitors-clock-tick internal] load build context
+#5 transferring context: 297B done
+#5 DONE 0.0s
+
+#6 [monitors-clock-tick 2/4] COPY . /usr/src/sentry
+#6 CACHED
+
+#7 [monitors-clock-tick 3/4] RUN if [ -s /usr/src/sentry/enhance-image.sh ]; then     /usr/src/sentry/enhance-image.sh; fi
+#7 CACHED
+
+#8 [monitors-clock-tick 4/4] RUN if [ -s /usr/src/sentry/requirements.txt ]; then     echo "sentry/requirements.txt is deprecated, use sentry/enhance-image.sh - see https://develop.sentry.dev/self-hosted/#enhance-sentry-image";     pip install -r /usr/src/sentry/requirements.txt; fi
+#8 CACHED
+
+#9 [monitors-clock-tick] exporting to image
+#9 exporting layers done
+#9 writing image sha256:a1243c77e96248481c52049ddd89dbb833cea7504e5e9994e412ee993cfd14ee done
+#9 naming to docker.io/library/sentry-self-hosted-local done
+#9 DONE 0.0s
+
+#10 [monitors-clock-tick] resolving provenance for metadata file
+#10 DONE 0.0s
+ monitors-clock-tick  Built
+#0 building with "default" instance using docker driver
+
+#1 [cron internal] load build definition from Dockerfile
+#1 transferring dockerfile: 462B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG ${SENTRY_IMAGE} results in empty or invalid base image name (line 2)
+#1 DONE 0.0s
+
+#2 [cron internal] load metadata for ghcr.io/sentry-arm/sentry:24.11.0
+#2 DONE 0.0s
+
+#3 [cron internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [cron 1/4] FROM ghcr.io/sentry-arm/sentry:24.11.0
+#4 DONE 0.0s
+
+#5 [cron internal] load build context
+#5 transferring context: 297B done
+#5 DONE 0.0s
+
+#6 [cron 2/4] COPY . /usr/src/sentry
+#6 CACHED
+
+#7 [cron 3/4] RUN if [ -s /usr/src/sentry/enhance-image.sh ]; then     /usr/src/sentry/enhance-image.sh; fi
+#7 CACHED
+
+#8 [cron 4/4] RUN if [ -s /usr/src/sentry/requirements.txt ]; then     echo "sentry/requirements.txt is deprecated, use sentry/enhance-image.sh - see https://develop.sentry.dev/self-hosted/#enhance-sentry-image";     pip install -r /usr/src/sentry/requirements.txt; fi
+#8 CACHED
+
+#9 [cron] exporting to image
+#9 exporting layers done
+#9 writing image sha256:56aefeeb62983be7922d81d4b6c87debfc42f742825886b76917c58a02541a53 done
+#9 naming to docker.io/library/sentry-self-hosted-local done
+#9 DONE 0.0s
+
+#10 [cron] resolving provenance for metadata file
+#10 DONE 0.0s
+ cron  Built
+#0 building with "default" instance using docker driver
+
+#1 [ingest-replay-recordings internal] load build definition from Dockerfile
+#1 transferring dockerfile: 462B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG ${SENTRY_IMAGE} results in empty or invalid base image name (line 2)
+#1 DONE 0.0s
+
+#2 [ingest-replay-recordings internal] load metadata for ghcr.io/sentry-arm/sentry:24.11.0
+#2 DONE 0.0s
+
+#3 [ingest-replay-recordings internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [ingest-replay-recordings 1/4] FROM ghcr.io/sentry-arm/sentry:24.11.0
+#4 DONE 0.0s
+
+#5 [ingest-replay-recordings internal] load build context
+#5 transferring context: 297B done
+#5 DONE 0.0s
+
+#6 [ingest-replay-recordings 3/4] RUN if [ -s /usr/src/sentry/enhance-image.sh ]; then     /usr/src/sentry/enhance-image.sh; fi
+#6 CACHED
+
+#7 [ingest-replay-recordings 2/4] COPY . /usr/src/sentry
+#7 CACHED
+
+#8 [ingest-replay-recordings 4/4] RUN if [ -s /usr/src/sentry/requirements.txt ]; then     echo "sentry/requirements.txt is deprecated, use sentry/enhance-image.sh - see https://develop.sentry.dev/self-hosted/#enhance-sentry-image";     pip install -r /usr/src/sentry/requirements.txt; fi
+#8 CACHED
+
+#9 [ingest-replay-recordings] exporting to image
+#9 exporting layers done
+#9 writing image sha256:7e2600fee69c1fa4f6c3d1d7860922be3075bf3fe97600f6f75c72981a643ff0 done
+#9 naming to docker.io/library/sentry-self-hosted-local done
+#9 DONE 0.0s
+
+#10 [ingest-replay-recordings] resolving provenance for metadata file
+#10 DONE 0.0s
+ ingest-replay-recordings  Built
+#0 building with "default" instance using docker driver
+
+#1 [web internal] load build definition from Dockerfile
+#1 transferring dockerfile: 462B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG ${SENTRY_IMAGE} results in empty or invalid base image name (line 2)
+#1 DONE 0.0s
+
+#2 [web internal] load metadata for ghcr.io/sentry-arm/sentry:24.11.0
+#2 DONE 0.0s
+
+#3 [web internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [web 1/4] FROM ghcr.io/sentry-arm/sentry:24.11.0
+#4 DONE 0.0s
+
+#5 [web internal] load build context
+#5 transferring context: 297B done
+#5 DONE 0.0s
+
+#6 [web 2/4] COPY . /usr/src/sentry
+#6 CACHED
+
+#7 [web 3/4] RUN if [ -s /usr/src/sentry/enhance-image.sh ]; then     /usr/src/sentry/enhance-image.sh; fi
+#7 CACHED
+
+#8 [web 4/4] RUN if [ -s /usr/src/sentry/requirements.txt ]; then     echo "sentry/requirements.txt is deprecated, use sentry/enhance-image.sh - see https://develop.sentry.dev/self-hosted/#enhance-sentry-image";     pip install -r /usr/src/sentry/requirements.txt; fi
+#8 CACHED
+
+#9 [web] exporting to image
+#9 exporting layers done
+#9 writing image sha256:3175b14472c6dcb10fcec44c4721aa2176455279b80adc98c85ea8c47daef357 done
+#9 naming to docker.io/library/sentry-self-hosted-local done
+#9 DONE 0.0s
+
+#10 [web] resolving provenance for metadata file
+#10 DONE 0.0s
+ web  Built
+#0 building with "default" instance using docker driver
+
+#1 [billing-metrics-consumer internal] load build definition from Dockerfile
+#1 transferring dockerfile: 462B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG ${SENTRY_IMAGE} results in empty or invalid base image name (line 2)
+#1 DONE 0.0s
+
+#2 [billing-metrics-consumer internal] load metadata for ghcr.io/sentry-arm/sentry:24.11.0
+#2 DONE 0.0s
+
+#3 [billing-metrics-consumer internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [billing-metrics-consumer 1/4] FROM ghcr.io/sentry-arm/sentry:24.11.0
+#4 DONE 0.0s
+
+#5 [billing-metrics-consumer internal] load build context
+#5 transferring context: 297B done
+#5 DONE 0.0s
+
+#6 [billing-metrics-consumer 2/4] COPY . /usr/src/sentry
+#6 CACHED
+
+#7 [billing-metrics-consumer 3/4] RUN if [ -s /usr/src/sentry/enhance-image.sh ]; then     /usr/src/sentry/enhance-image.sh; fi
+#7 CACHED
+
+#8 [billing-metrics-consumer 4/4] RUN if [ -s /usr/src/sentry/requirements.txt ]; then     echo "sentry/requirements.txt is deprecated, use sentry/enhance-image.sh - see https://develop.sentry.dev/self-hosted/#enhance-sentry-image";     pip install -r /usr/src/sentry/requirements.txt; fi
+#8 CACHED
+
+#9 [billing-metrics-consumer] exporting to image
+#9 exporting layers done
+#9 writing image sha256:f55075a5b8c0c294f1821bf09367b366a98569ef60efad3d44b556add52d0863 done
+#9 naming to docker.io/library/sentry-self-hosted-local done
+#9 DONE 0.0s
+
+#10 [billing-metrics-consumer] resolving provenance for metadata file
+#10 DONE 0.0s
+ billing-metrics-consumer  Built
+#0 building with "default" instance using docker driver
+
+#1 [generic-metrics-consumer internal] load build definition from Dockerfile
+#1 transferring dockerfile: 462B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG ${SENTRY_IMAGE} results in empty or invalid base image name (line 2)
+#1 DONE 0.0s
+
+#2 [generic-metrics-consumer internal] load metadata for ghcr.io/sentry-arm/sentry:24.11.0
+#2 DONE 0.0s
+
+#3 [generic-metrics-consumer internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [generic-metrics-consumer 1/4] FROM ghcr.io/sentry-arm/sentry:24.11.0
+#4 DONE 0.0s
+
+#5 [generic-metrics-consumer internal] load build context
+#5 transferring context: 297B done
+#5 DONE 0.0s
+
+#6 [generic-metrics-consumer 2/4] COPY . /usr/src/sentry
+#6 CACHED
+
+#7 [generic-metrics-consumer 3/4] RUN if [ -s /usr/src/sentry/enhance-image.sh ]; then     /usr/src/sentry/enhance-image.sh; fi
+#7 CACHED
+
+#8 [generic-metrics-consumer 4/4] RUN if [ -s /usr/src/sentry/requirements.txt ]; then     echo "sentry/requirements.txt is deprecated, use sentry/enhance-image.sh - see https://develop.sentry.dev/self-hosted/#enhance-sentry-image";     pip install -r /usr/src/sentry/requirements.txt; fi
+#8 CACHED
+
+#9 [generic-metrics-consumer] exporting to image
+#9 exporting layers done
+#9 writing image sha256:1fa215842f09b6d951f557d4aea70ae5c80e0cb6f9720fdc334c50d41b8f1c91 done
+#9 naming to docker.io/library/sentry-self-hosted-local done
+#9 DONE 0.0s
+
+#10 [generic-metrics-consumer] resolving provenance for metadata file
+#10 DONE 0.0s
+ generic-metrics-consumer  Built
+#0 building with "default" instance using docker driver
+
+#1 [vroom-cleanup internal] load build definition from Dockerfile
+#1 transferring dockerfile: 469B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG ${BASE_IMAGE} results in empty or invalid base image name (line 2)
+#1 DONE 0.0s
+
+#2 [vroom-cleanup internal] load metadata for ghcr.io/sentry-arm/vroom:24.11.0
+#2 DONE 0.0s
+
+#3 [vroom-cleanup internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [vroom-cleanup 1/5] FROM ghcr.io/sentry-arm/vroom:24.11.0
+#4 DONE 0.0s
+
+#5 [vroom-cleanup internal] load build context
+#5 transferring context: 35B done
+#5 DONE 0.0s
+
+#6 [vroom-cleanup 3/5] RUN if [ -n "${https_proxy}" ]; then echo "Acquire::https::proxy "${https_proxy}";" >> /etc/apt/apt.conf; fi
+#6 CACHED
+
+#7 [vroom-cleanup 2/5] RUN if [ -n "${http_proxy}" ]; then echo "Acquire::http::proxy "${http_proxy}";" >> /etc/apt/apt.conf; fi
+#7 CACHED
+
+#8 [vroom-cleanup 4/5] RUN apt-get update && apt-get install -y --no-install-recommends cron &&     rm -r /var/lib/apt/lists/*
+#8 CACHED
+
+#9 [vroom-cleanup 5/5] COPY entrypoint.sh /entrypoint.sh
+#9 CACHED
+
+#10 [vroom-cleanup] exporting to image
+#10 exporting layers done
+#10 writing image sha256:749c0fd8036fd0ae9623b0a4dc034299834d715166ffda1b262fdb7f7bf931b0 done
+#10 naming to docker.io/library/vroom-cleanup-self-hosted-local done
+#10 DONE 0.0s
+
+#11 [vroom-cleanup] resolving provenance for metadata file
+#11 DONE 0.0s
+ vroom-cleanup  Built
+#0 building with "default" instance using docker driver
+
+#1 [symbolicator-cleanup internal] load build definition from Dockerfile
+#1 transferring dockerfile: 469B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG ${BASE_IMAGE} results in empty or invalid base image name (line 2)
+#1 DONE 0.0s
+
+#2 [symbolicator-cleanup internal] load metadata for ghcr.io/sentry-arm/symbolicator:24.11.0
+#2 DONE 0.0s
+
+#3 [symbolicator-cleanup internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [symbolicator-cleanup 1/5] FROM ghcr.io/sentry-arm/symbolicator:24.11.0
+#4 DONE 0.0s
+
+#5 [symbolicator-cleanup internal] load build context
+#5 transferring context: 35B done
+#5 DONE 0.0s
+
+#6 [symbolicator-cleanup 4/5] RUN apt-get update && apt-get install -y --no-install-recommends cron &&     rm -r /var/lib/apt/lists/*
+#6 CACHED
+
+#7 [symbolicator-cleanup 2/5] RUN if [ -n "${http_proxy}" ]; then echo "Acquire::http::proxy "${http_proxy}";" >> /etc/apt/apt.conf; fi
+#7 CACHED
+
+#8 [symbolicator-cleanup 3/5] RUN if [ -n "${https_proxy}" ]; then echo "Acquire::https::proxy "${https_proxy}";" >> /etc/apt/apt.conf; fi
+#8 CACHED
+
+#9 [symbolicator-cleanup 5/5] COPY entrypoint.sh /entrypoint.sh
+#9 CACHED
+
+#10 [symbolicator-cleanup] exporting to image
+#10 exporting layers done
+#10 writing image sha256:2847cd589af9cbb8a56f776402e3eea573a14c6c8087000f97ab6614ef07f223 done
+#10 naming to docker.io/library/symbolicator-cleanup-self-hosted-local done
+#10 DONE 0.0s
+
+#11 [symbolicator-cleanup] resolving provenance for metadata file
+#11 DONE 0.0s
+ symbolicator-cleanup  Built
+#0 building with "default" instance using docker driver
+
+#1 [transactions-consumer internal] load build definition from Dockerfile
+#1 transferring dockerfile: 462B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG ${SENTRY_IMAGE} results in empty or invalid base image name (line 2)
+#1 DONE 0.0s
+
+#2 [transactions-consumer internal] load metadata for ghcr.io/sentry-arm/sentry:24.11.0
+#2 DONE 0.0s
+
+#3 [transactions-consumer internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [transactions-consumer 1/4] FROM ghcr.io/sentry-arm/sentry:24.11.0
+#4 DONE 0.0s
+
+#5 [transactions-consumer internal] load build context
+#5 transferring context: 297B done
+#5 DONE 0.0s
+
+#6 [transactions-consumer 2/4] COPY . /usr/src/sentry
+#6 CACHED
+
+#7 [transactions-consumer 3/4] RUN if [ -s /usr/src/sentry/enhance-image.sh ]; then     /usr/src/sentry/enhance-image.sh; fi
+#7 CACHED
+
+#8 [transactions-consumer 4/4] RUN if [ -s /usr/src/sentry/requirements.txt ]; then     echo "sentry/requirements.txt is deprecated, use sentry/enhance-image.sh - see https://develop.sentry.dev/self-hosted/#enhance-sentry-image";     pip install -r /usr/src/sentry/requirements.txt; fi
+#8 CACHED
+
+#9 [transactions-consumer] exporting to image
+#9 exporting layers done
+#9 writing image sha256:b723d8a6638cad4556e7477fd1226469f2b67f43d60904d158e6f72083de76f3 done
+#9 naming to docker.io/library/sentry-self-hosted-local done
+#9 DONE 0.0s
+
+#10 [transactions-consumer] resolving provenance for metadata file
+#10 DONE 0.0s
+ transactions-consumer  Built
+#0 building with "default" instance using docker driver
+
+#1 [ingest-occurrences internal] load build definition from Dockerfile
+#1 transferring dockerfile: 462B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG ${SENTRY_IMAGE} results in empty or invalid base image name (line 2)
+#1 DONE 0.0s
+
+#2 [ingest-occurrences internal] load metadata for ghcr.io/sentry-arm/sentry:24.11.0
+#2 DONE 0.0s
+
+#3 [ingest-occurrences internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [ingest-occurrences 1/4] FROM ghcr.io/sentry-arm/sentry:24.11.0
+#4 DONE 0.0s
+
+#5 [ingest-occurrences internal] load build context
+#5 transferring context: 297B done
+#5 DONE 0.0s
+
+#6 [ingest-occurrences 3/4] RUN if [ -s /usr/src/sentry/enhance-image.sh ]; then     /usr/src/sentry/enhance-image.sh; fi
+#6 CACHED
+
+#7 [ingest-occurrences 2/4] COPY . /usr/src/sentry
+#7 CACHED
+
+#8 [ingest-occurrences 4/4] RUN if [ -s /usr/src/sentry/requirements.txt ]; then     echo "sentry/requirements.txt is deprecated, use sentry/enhance-image.sh - see https://develop.sentry.dev/self-hosted/#enhance-sentry-image";     pip install -r /usr/src/sentry/requirements.txt; fi
+#8 CACHED
+
+#9 [ingest-occurrences] exporting to image
+#9 exporting layers done
+#9 writing image sha256:b6bf829a7336a27a7fe0f1d60feb9247447e14d06580080f2fec62932e016b0c done
+#9 naming to docker.io/library/sentry-self-hosted-local done
+#9 DONE 0.0s
+
+#10 [ingest-occurrences] resolving provenance for metadata file
+#10 DONE 0.0s
+ ingest-occurrences  Built
+#0 building with "default" instance using docker driver
+
+#1 [sentry-cleanup internal] load build definition from Dockerfile
+#1 transferring dockerfile: 469B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG ${BASE_IMAGE} results in empty or invalid base image name (line 2)
+#1 DONE 0.0s
+
+#2 [sentry-cleanup internal] load metadata for docker.io/library/sentry-self-hosted-local:latest
+#2 DONE 0.0s
+
+#3 [sentry-cleanup internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [sentry-cleanup 1/5] FROM docker.io/library/sentry-self-hosted-local:latest
+#4 DONE 0.0s
+
+#5 [sentry-cleanup internal] load build context
+#5 transferring context: 35B done
+#5 DONE 0.0s
+
+#6 [sentry-cleanup 2/5] RUN if [ -n "${http_proxy}" ]; then echo "Acquire::http::proxy "${http_proxy}";" >> /etc/apt/apt.conf; fi
+#6 CACHED
+
+#7 [sentry-cleanup 3/5] RUN if [ -n "${https_proxy}" ]; then echo "Acquire::https::proxy "${https_proxy}";" >> /etc/apt/apt.conf; fi
+#7 CACHED
+
+#8 [sentry-cleanup 4/5] RUN apt-get update && apt-get install -y --no-install-recommends cron &&     rm -r /var/lib/apt/lists/*
+#8 CACHED
+
+#9 [sentry-cleanup 5/5] COPY entrypoint.sh /entrypoint.sh
+#9 CACHED
+
+#10 [sentry-cleanup] exporting to image
+#10 exporting layers done
+#10 writing image sha256:344cf88697908f48aa86758556a0976a5dc8d570db571d3400b6bf1c10a2e1aa done
+#10 naming to docker.io/library/sentry-cleanup-self-hosted-local done
+#10 DONE 0.0s
+
+#11 [sentry-cleanup] resolving provenance for metadata file
+#11 DONE 0.0s
+ sentry-cleanup  Built
+#0 building with "default" instance using docker driver
+
+#1 [subscription-consumer-events internal] load build definition from Dockerfile
+#1 transferring dockerfile: 462B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG ${SENTRY_IMAGE} results in empty or invalid base image name (line 2)
+#1 DONE 0.0s
+
+#2 [subscription-consumer-events internal] load metadata for ghcr.io/sentry-arm/sentry:24.11.0
+#2 DONE 0.0s
+
+#3 [subscription-consumer-events internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [subscription-consumer-events 1/4] FROM ghcr.io/sentry-arm/sentry:24.11.0
+#4 DONE 0.0s
+
+#5 [subscription-consumer-events internal] load build context
+#5 transferring context: 297B done
+#5 DONE 0.0s
+
+#6 [subscription-consumer-events 2/4] COPY . /usr/src/sentry
+#6 CACHED
+
+#7 [subscription-consumer-events 3/4] RUN if [ -s /usr/src/sentry/enhance-image.sh ]; then     /usr/src/sentry/enhance-image.sh; fi
+#7 CACHED
+
+#8 [subscription-consumer-events 4/4] RUN if [ -s /usr/src/sentry/requirements.txt ]; then     echo "sentry/requirements.txt is deprecated, use sentry/enhance-image.sh - see https://develop.sentry.dev/self-hosted/#enhance-sentry-image";     pip install -r /usr/src/sentry/requirements.txt; fi
+#8 CACHED
+
+#9 [subscription-consumer-events] exporting to image
+#9 exporting layers done
+#9 writing image sha256:9832431a343edb95663aaac2bfc45a675cff8d52d6131966416f29a11e310b4d done
+#9 naming to docker.io/library/sentry-self-hosted-local done
+#9 DONE 0.0s
+
+#10 [subscription-consumer-events] resolving provenance for metadata file
+#10 DONE 0.0s
+ subscription-consumer-events  Built
+#0 building with "default" instance using docker driver
+
+#1 [subscription-consumer-generic-metrics internal] load build definition from Dockerfile
+#1 transferring dockerfile: 462B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG ${SENTRY_IMAGE} results in empty or invalid base image name (line 2)
+#1 DONE 0.0s
+
+#2 [subscription-consumer-generic-metrics internal] load metadata for ghcr.io/sentry-arm/sentry:24.11.0
+#2 DONE 0.0s
+
+#3 [subscription-consumer-generic-metrics internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [subscription-consumer-generic-metrics 1/4] FROM ghcr.io/sentry-arm/sentry:24.11.0
+#4 DONE 0.0s
+
+#5 [subscription-consumer-generic-metrics internal] load build context
+#5 transferring context: 297B done
+#5 DONE 0.0s
+
+#6 [subscription-consumer-generic-metrics 3/4] RUN if [ -s /usr/src/sentry/enhance-image.sh ]; then     /usr/src/sentry/enhance-image.sh; fi
+#6 CACHED
+
+#7 [subscription-consumer-generic-metrics 2/4] COPY . /usr/src/sentry
+#7 CACHED
+
+#8 [subscription-consumer-generic-metrics 4/4] RUN if [ -s /usr/src/sentry/requirements.txt ]; then     echo "sentry/requirements.txt is deprecated, use sentry/enhance-image.sh - see https://develop.sentry.dev/self-hosted/#enhance-sentry-image";     pip install -r /usr/src/sentry/requirements.txt; fi
+#8 CACHED
+
+#9 [subscription-consumer-generic-metrics] exporting to image
+#9 exporting layers done
+#9 writing image sha256:b4e22a9ad74084493fcc110733f64b725b15f00fa9fccb2933467f3b25389afc done
+#9 naming to docker.io/library/sentry-self-hosted-local done
+#9 DONE 0.0s
+
+#10 [subscription-consumer-generic-metrics] resolving provenance for metadata file
+#10 DONE 0.0s
+ subscription-consumer-generic-metrics  Built
+#0 building with "default" instance using docker driver
+
+#1 [monitors-clock-tasks internal] load build definition from Dockerfile
+#1 transferring dockerfile: 462B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG ${SENTRY_IMAGE} results in empty or invalid base image name (line 2)
+#1 DONE 0.0s
+
+#2 [monitors-clock-tasks internal] load metadata for ghcr.io/sentry-arm/sentry:24.11.0
+#2 DONE 0.0s
+
+#3 [monitors-clock-tasks internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [monitors-clock-tasks 1/4] FROM ghcr.io/sentry-arm/sentry:24.11.0
+#4 DONE 0.0s
+
+#5 [monitors-clock-tasks internal] load build context
+#5 transferring context: 297B done
+#5 DONE 0.0s
+
+#6 [monitors-clock-tasks 2/4] COPY . /usr/src/sentry
+#6 CACHED
+
+#7 [monitors-clock-tasks 3/4] RUN if [ -s /usr/src/sentry/enhance-image.sh ]; then     /usr/src/sentry/enhance-image.sh; fi
+#7 CACHED
+
+#8 [monitors-clock-tasks 4/4] RUN if [ -s /usr/src/sentry/requirements.txt ]; then     echo "sentry/requirements.txt is deprecated, use sentry/enhance-image.sh - see https://develop.sentry.dev/self-hosted/#enhance-sentry-image";     pip install -r /usr/src/sentry/requirements.txt; fi
+#8 CACHED
+
+#9 [monitors-clock-tasks] exporting to image
+#9 exporting layers done
+#9 writing image sha256:118b3026abd07a2bc3ac7faa85e1a39fe64b5616aa587be259d28d49884657fc done
+#9 naming to docker.io/library/sentry-self-hosted-local done
+#9 DONE 0.0s
+
+#10 [monitors-clock-tasks] resolving provenance for metadata file
+#10 DONE 0.0s
+ monitors-clock-tasks  Built
+#0 building with "default" instance using docker driver
+
+#1 [attachments-consumer internal] load build definition from Dockerfile
+#1 transferring dockerfile: 462B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG ${SENTRY_IMAGE} results in empty or invalid base image name (line 2)
+#1 DONE 0.0s
+
+#2 [attachments-consumer internal] load metadata for ghcr.io/sentry-arm/sentry:24.11.0
+#2 DONE 0.0s
+
+#3 [attachments-consumer internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [attachments-consumer 1/4] FROM ghcr.io/sentry-arm/sentry:24.11.0
+#4 DONE 0.0s
+
+#5 [attachments-consumer internal] load build context
+#5 transferring context: 297B done
+#5 DONE 0.0s
+
+#6 [attachments-consumer 2/4] COPY . /usr/src/sentry
+#6 CACHED
+
+#7 [attachments-consumer 3/4] RUN if [ -s /usr/src/sentry/enhance-image.sh ]; then     /usr/src/sentry/enhance-image.sh; fi
+#7 CACHED
+
+#8 [attachments-consumer 4/4] RUN if [ -s /usr/src/sentry/requirements.txt ]; then     echo "sentry/requirements.txt is deprecated, use sentry/enhance-image.sh - see https://develop.sentry.dev/self-hosted/#enhance-sentry-image";     pip install -r /usr/src/sentry/requirements.txt; fi
+#8 CACHED
+
+#9 [attachments-consumer] exporting to image
+#9 exporting layers done
+#9 writing image sha256:d1fb55acf57f2e74c7d28cf14cac73187b0e1253585c5713a13eff62a9503fa8 done
+#9 naming to docker.io/library/sentry-self-hosted-local done
+#9 DONE 0.0s
+
+#10 [attachments-consumer] resolving provenance for metadata file
+#10 DONE 0.0s
+ attachments-consumer  Built
+#0 building with "default" instance using docker driver
+
+#1 [post-process-forwarder-issue-platform internal] load build definition from Dockerfile
+#1 transferring dockerfile: 462B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG ${SENTRY_IMAGE} results in empty or invalid base image name (line 2)
+#1 DONE 0.0s
+
+#2 [post-process-forwarder-issue-platform internal] load metadata for ghcr.io/sentry-arm/sentry:24.11.0
+#2 DONE 0.0s
+
+#3 [post-process-forwarder-issue-platform internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [post-process-forwarder-issue-platform 1/4] FROM ghcr.io/sentry-arm/sentry:24.11.0
+#4 DONE 0.0s
+
+#5 [post-process-forwarder-issue-platform internal] load build context
+#5 transferring context: 297B done
+#5 DONE 0.0s
+
+#6 [post-process-forwarder-issue-platform 2/4] COPY . /usr/src/sentry
+#6 CACHED
+
+#7 [post-process-forwarder-issue-platform 3/4] RUN if [ -s /usr/src/sentry/enhance-image.sh ]; then     /usr/src/sentry/enhance-image.sh; fi
+#7 CACHED
+
+#8 [post-process-forwarder-issue-platform 4/4] RUN if [ -s /usr/src/sentry/requirements.txt ]; then     echo "sentry/requirements.txt is deprecated, use sentry/enhance-image.sh - see https://develop.sentry.dev/self-hosted/#enhance-sentry-image";     pip install -r /usr/src/sentry/requirements.txt; fi
+#8 CACHED
+
+#9 [post-process-forwarder-issue-platform] exporting to image
+#9 exporting layers done
+#9 writing image sha256:059b31374a43ad37e6c4aadf4d41d2c9135063198fd459548da1d32fb7724c13 done
+#9 naming to docker.io/library/sentry-self-hosted-local done
+#9 DONE 0.0s
+
+#10 [post-process-forwarder-issue-platform] resolving provenance for metadata file
+#10 DONE 0.0s
+ post-process-forwarder-issue-platform  Built
+#0 building with "default" instance using docker driver
+
+#1 [subscription-consumer-metrics internal] load build definition from Dockerfile
+#1 transferring dockerfile: 462B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG ${SENTRY_IMAGE} results in empty or invalid base image name (line 2)
+#1 DONE 0.0s
+
+#2 [subscription-consumer-metrics internal] load metadata for ghcr.io/sentry-arm/sentry:24.11.0
+#2 DONE 0.0s
+
+#3 [subscription-consumer-metrics internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [subscription-consumer-metrics 1/4] FROM ghcr.io/sentry-arm/sentry:24.11.0
+#4 DONE 0.0s
+
+#5 [subscription-consumer-metrics internal] load build context
+#5 transferring context: 297B done
+#5 DONE 0.0s
+
+#6 [subscription-consumer-metrics 3/4] RUN if [ -s /usr/src/sentry/enhance-image.sh ]; then     /usr/src/sentry/enhance-image.sh; fi
+#6 CACHED
+
+#7 [subscription-consumer-metrics 2/4] COPY . /usr/src/sentry
+#7 CACHED
+
+#8 [subscription-consumer-metrics 4/4] RUN if [ -s /usr/src/sentry/requirements.txt ]; then     echo "sentry/requirements.txt is deprecated, use sentry/enhance-image.sh - see https://develop.sentry.dev/self-hosted/#enhance-sentry-image";     pip install -r /usr/src/sentry/requirements.txt; fi
+#8 CACHED
+
+#9 [subscription-consumer-metrics] exporting to image
+#9 exporting layers done
+#9 writing image sha256:2d287be2448a6a9dd48487367e57400e3c0d039aeb7afe5f0b3808a4ce1221d3 done
+#9 naming to docker.io/library/sentry-self-hosted-local done
+#9 DONE 0.0s
+
+#10 [subscription-consumer-metrics] resolving provenance for metadata file
+#10 DONE 0.0s
+ subscription-consumer-metrics  Built
+#0 building with "default" instance using docker driver
+
+#1 [worker internal] load build definition from Dockerfile
+#1 transferring dockerfile: 462B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG ${SENTRY_IMAGE} results in empty or invalid base image name (line 2)
+#1 DONE 0.0s
+
+#2 [worker internal] load metadata for ghcr.io/sentry-arm/sentry:24.11.0
+#2 DONE 0.0s
+
+#3 [worker internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [worker 1/4] FROM ghcr.io/sentry-arm/sentry:24.11.0
+#4 DONE 0.0s
+
+#5 [worker internal] load build context
+#5 transferring context: 297B done
+#5 DONE 0.0s
+
+#6 [worker 3/4] RUN if [ -s /usr/src/sentry/enhance-image.sh ]; then     /usr/src/sentry/enhance-image.sh; fi
+#6 CACHED
+
+#7 [worker 2/4] COPY . /usr/src/sentry
+#7 CACHED
+
+#8 [worker 4/4] RUN if [ -s /usr/src/sentry/requirements.txt ]; then     echo "sentry/requirements.txt is deprecated, use sentry/enhance-image.sh - see https://develop.sentry.dev/self-hosted/#enhance-sentry-image";     pip install -r /usr/src/sentry/requirements.txt; fi
+#8 CACHED
+
+#9 [worker] exporting to image
+#9 exporting layers done
+#9 writing image sha256:0ac399b48536d21b119c6f28084fcc6ae671a66c8d4b196ecabe62550b74de25 done
+#9 naming to docker.io/library/sentry-self-hosted-local done
+#9 DONE 0.0s
+
+#10 [worker] resolving provenance for metadata file
+#10 DONE 0.0s
+ worker  Built
+#0 building with "default" instance using docker driver
+
+#1 [ingest-monitors internal] load build definition from Dockerfile
+#1 transferring dockerfile: 462B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG ${SENTRY_IMAGE} results in empty or invalid base image name (line 2)
+#1 DONE 0.0s
+
+#2 [ingest-monitors internal] load metadata for ghcr.io/sentry-arm/sentry:24.11.0
+#2 DONE 0.0s
+
+#3 [ingest-monitors internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [ingest-monitors 1/4] FROM ghcr.io/sentry-arm/sentry:24.11.0
+#4 DONE 0.0s
+
+#5 [ingest-monitors internal] load build context
+#5 transferring context: 297B done
+#5 DONE 0.0s
+
+#6 [ingest-monitors 2/4] COPY . /usr/src/sentry
+#6 CACHED
+
+#7 [ingest-monitors 3/4] RUN if [ -s /usr/src/sentry/enhance-image.sh ]; then     /usr/src/sentry/enhance-image.sh; fi
+#7 CACHED
+
+#8 [ingest-monitors 4/4] RUN if [ -s /usr/src/sentry/requirements.txt ]; then     echo "sentry/requirements.txt is deprecated, use sentry/enhance-image.sh - see https://develop.sentry.dev/self-hosted/#enhance-sentry-image";     pip install -r /usr/src/sentry/requirements.txt; fi
+#8 CACHED
+
+#9 [ingest-monitors] exporting to image
+#9 exporting layers done
+#9 writing image sha256:7dc7bc94bf70e37f3409a5ba82708ffa0378f3301774cf9ce2eb80bc8ca3c051 done
+#9 naming to docker.io/library/sentry-self-hosted-local done
+#9 DONE 0.0s
+
+#10 [ingest-monitors] resolving provenance for metadata file
+#10 DONE 0.0s
+ ingest-monitors  Built
+#0 building with "default" instance using docker driver
+
+#1 [events-consumer internal] load build definition from Dockerfile
+#1 transferring dockerfile: 462B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG ${SENTRY_IMAGE} results in empty or invalid base image name (line 2)
+#1 DONE 0.0s
+
+#2 [events-consumer internal] load metadata for ghcr.io/sentry-arm/sentry:24.11.0
+#2 DONE 0.0s
+
+#3 [events-consumer internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [events-consumer 1/4] FROM ghcr.io/sentry-arm/sentry:24.11.0
+#4 DONE 0.0s
+
+#5 [events-consumer internal] load build context
+#5 transferring context: 297B done
+#5 DONE 0.0s
+
+#6 [events-consumer 2/4] COPY . /usr/src/sentry
+#6 CACHED
+
+#7 [events-consumer 3/4] RUN if [ -s /usr/src/sentry/enhance-image.sh ]; then     /usr/src/sentry/enhance-image.sh; fi
+#7 CACHED
+
+#8 [events-consumer 4/4] RUN if [ -s /usr/src/sentry/requirements.txt ]; then     echo "sentry/requirements.txt is deprecated, use sentry/enhance-image.sh - see https://develop.sentry.dev/self-hosted/#enhance-sentry-image";     pip install -r /usr/src/sentry/requirements.txt; fi
+#8 CACHED
+
+#9 [events-consumer] exporting to image
+#9 exporting layers done
+#9 writing image sha256:de994c36634479d099d0cc1486256b9818e4f842c3c507d8830e25d0f5d0aba3 done
+#9 naming to docker.io/library/sentry-self-hosted-local done
+#9 DONE 0.0s
+
+#10 [events-consumer] resolving provenance for metadata file
+#10 DONE 0.0s
+ events-consumer  Built
+#0 building with "default" instance using docker driver
+
+#1 [subscription-consumer-transactions internal] load build definition from Dockerfile
+#1 transferring dockerfile: 462B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG ${SENTRY_IMAGE} results in empty or invalid base image name (line 2)
+#1 DONE 0.0s
+
+#2 [subscription-consumer-transactions internal] load metadata for ghcr.io/sentry-arm/sentry:24.11.0
+#2 DONE 0.0s
+
+#3 [subscription-consumer-transactions internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [subscription-consumer-transactions 1/4] FROM ghcr.io/sentry-arm/sentry:24.11.0
+#4 DONE 0.0s
+
+#5 [subscription-consumer-transactions internal] load build context
+#5 transferring context: 297B done
+#5 DONE 0.0s
+
+#6 [subscription-consumer-transactions 3/4] RUN if [ -s /usr/src/sentry/enhance-image.sh ]; then     /usr/src/sentry/enhance-image.sh; fi
+#6 CACHED
+
+#7 [subscription-consumer-transactions 2/4] COPY . /usr/src/sentry
+#7 CACHED
+
+#8 [subscription-consumer-transactions 4/4] RUN if [ -s /usr/src/sentry/requirements.txt ]; then     echo "sentry/requirements.txt is deprecated, use sentry/enhance-image.sh - see https://develop.sentry.dev/self-hosted/#enhance-sentry-image";     pip install -r /usr/src/sentry/requirements.txt; fi
+#8 CACHED
+
+#9 [subscription-consumer-transactions] exporting to image
+#9 exporting layers done
+#9 writing image sha256:0ea31571e957a8593f6be2a582574af872370eee35f2c25969765132263748a8 done
+#9 naming to docker.io/library/sentry-self-hosted-local done
+#9 DONE 0.0s
+
+#10 [subscription-consumer-transactions] resolving provenance for metadata file
+#10 DONE 0.0s
+ subscription-consumer-transactions  Built
+#0 building with "default" instance using docker driver
+
+#1 [ingest-feedback-events internal] load build definition from Dockerfile
+#1 transferring dockerfile: 462B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG ${SENTRY_IMAGE} results in empty or invalid base image name (line 2)
+#1 DONE 0.0s
+
+#2 [ingest-feedback-events internal] load metadata for ghcr.io/sentry-arm/sentry:24.11.0
+#2 DONE 0.0s
+
+#3 [ingest-feedback-events internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [ingest-feedback-events 1/4] FROM ghcr.io/sentry-arm/sentry:24.11.0
+#4 DONE 0.0s
+
+#5 [ingest-feedback-events internal] load build context
+#5 transferring context: 297B done
+#5 DONE 0.0s
+
+#6 [ingest-feedback-events 2/4] COPY . /usr/src/sentry
+#6 CACHED
+
+#7 [ingest-feedback-events 3/4] RUN if [ -s /usr/src/sentry/enhance-image.sh ]; then     /usr/src/sentry/enhance-image.sh; fi
+#7 CACHED
+
+#8 [ingest-feedback-events 4/4] RUN if [ -s /usr/src/sentry/requirements.txt ]; then     echo "sentry/requirements.txt is deprecated, use sentry/enhance-image.sh - see https://develop.sentry.dev/self-hosted/#enhance-sentry-image";     pip install -r /usr/src/sentry/requirements.txt; fi
+#8 CACHED
+
+#9 [ingest-feedback-events] exporting to image
+#9 exporting layers done
+#9 writing image sha256:258bfc6724cb43995dc651dd9974391f6ec24c7f3f0c411d6e39affd02ec8d1a done
+#9 naming to docker.io/library/sentry-self-hosted-local done
+#9 DONE 0.0s
+
+#10 [ingest-feedback-events] resolving provenance for metadata file
+#10 DONE 0.0s
+ ingest-feedback-events  Built
+#0 building with "default" instance using docker driver
+
+#1 [metrics-consumer internal] load build definition from Dockerfile
+#1 transferring dockerfile: 462B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG ${SENTRY_IMAGE} results in empty or invalid base image name (line 2)
+#1 DONE 0.0s
+
+#2 [metrics-consumer internal] load metadata for ghcr.io/sentry-arm/sentry:24.11.0
+#2 DONE 0.0s
+
+#3 [metrics-consumer internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [metrics-consumer 1/4] FROM ghcr.io/sentry-arm/sentry:24.11.0
+#4 DONE 0.0s
+
+#5 [metrics-consumer internal] load build context
+#5 transferring context: 297B done
+#5 DONE 0.0s
+
+#6 [metrics-consumer 3/4] RUN if [ -s /usr/src/sentry/enhance-image.sh ]; then     /usr/src/sentry/enhance-image.sh; fi
+#6 CACHED
+
+#7 [metrics-consumer 2/4] COPY . /usr/src/sentry
+#7 CACHED
+
+#8 [metrics-consumer 4/4] RUN if [ -s /usr/src/sentry/requirements.txt ]; then     echo "sentry/requirements.txt is deprecated, use sentry/enhance-image.sh - see https://develop.sentry.dev/self-hosted/#enhance-sentry-image";     pip install -r /usr/src/sentry/requirements.txt; fi
+#8 CACHED
+
+#9 [metrics-consumer] exporting to image
+#9 exporting layers done
+#9 writing image sha256:2140a0dbbb8e4b584cc3e49c2a1d58aae91ea571fb82f0b472b1398e72dde65f done
+#9 naming to docker.io/library/sentry-self-hosted-local done
+#9 DONE 0.0s
+
+#10 [metrics-consumer] resolving provenance for metadata file
+#10 DONE 0.0s
+ metrics-consumer  Built
+#0 building with "default" instance using docker driver
+
+#1 [post-process-forwarder-errors internal] load build definition from Dockerfile
+#1 transferring dockerfile: 462B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG ${SENTRY_IMAGE} results in empty or invalid base image name (line 2)
+#1 DONE 0.0s
+
+#2 [post-process-forwarder-errors internal] load metadata for ghcr.io/sentry-arm/sentry:24.11.0
+#2 DONE 0.0s
+
+#3 [post-process-forwarder-errors internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [post-process-forwarder-errors 1/4] FROM ghcr.io/sentry-arm/sentry:24.11.0
+#4 DONE 0.0s
+
+#5 [post-process-forwarder-errors internal] load build context
+#5 transferring context: 297B done
+#5 DONE 0.0s
+
+#6 [post-process-forwarder-errors 2/4] COPY . /usr/src/sentry
+#6 CACHED
+
+#7 [post-process-forwarder-errors 3/4] RUN if [ -s /usr/src/sentry/enhance-image.sh ]; then     /usr/src/sentry/enhance-image.sh; fi
+#7 CACHED
+
+#8 [post-process-forwarder-errors 4/4] RUN if [ -s /usr/src/sentry/requirements.txt ]; then     echo "sentry/requirements.txt is deprecated, use sentry/enhance-image.sh - see https://develop.sentry.dev/self-hosted/#enhance-sentry-image";     pip install -r /usr/src/sentry/requirements.txt; fi
+#8 CACHED
+
+#9 [post-process-forwarder-errors] exporting to image
+#9 exporting layers done
+#9 writing image sha256:971d1823994a77d2262a20b1ae582e4bcf00bde52f5692c8a86c166d116172c7 done
+#9 naming to docker.io/library/sentry-self-hosted-local done
+#9 DONE 0.0s
+
+#10 [post-process-forwarder-errors] resolving provenance for metadata file
+#10 DONE 0.0s
+ post-process-forwarder-errors  Built
+#0 building with "default" instance using docker driver
+
+#1 [ingest-profiles internal] load build definition from Dockerfile
+#1 transferring dockerfile: 462B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG ${SENTRY_IMAGE} results in empty or invalid base image name (line 2)
+#1 DONE 0.0s
+
+#2 [ingest-profiles internal] load metadata for ghcr.io/sentry-arm/sentry:24.11.0
+#2 DONE 0.0s
+
+#3 [ingest-profiles internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [ingest-profiles 1/4] FROM ghcr.io/sentry-arm/sentry:24.11.0
+#4 DONE 0.0s
+
+#5 [ingest-profiles internal] load build context
+#5 transferring context: 297B done
+#5 DONE 0.0s
+
+#6 [ingest-profiles 2/4] COPY . /usr/src/sentry
+#6 CACHED
+
+#7 [ingest-profiles 3/4] RUN if [ -s /usr/src/sentry/enhance-image.sh ]; then     /usr/src/sentry/enhance-image.sh; fi
+#7 CACHED
+
+#8 [ingest-profiles 4/4] RUN if [ -s /usr/src/sentry/requirements.txt ]; then     echo "sentry/requirements.txt is deprecated, use sentry/enhance-image.sh - see https://develop.sentry.dev/self-hosted/#enhance-sentry-image";     pip install -r /usr/src/sentry/requirements.txt; fi
+#8 CACHED
+
+#9 [ingest-profiles] exporting to image
+#9 exporting layers done
+#9 writing image sha256:d4847d6a0099a8a19564433185ec00b076e65cef2a081a3df03200b060007336 done
+#9 naming to docker.io/library/sentry-self-hosted-local done
+#9 DONE 0.0s
+
+#10 [ingest-profiles] resolving provenance for metadata file
+#10 DONE 0.0s
+ ingest-profiles  Built
+#0 building with "default" instance using docker driver
+
+#1 [post-process-forwarder-transactions internal] load build definition from Dockerfile
+#1 transferring dockerfile: 462B done
+#1 WARN: InvalidDefaultArgInFrom: Default value for ARG ${SENTRY_IMAGE} results in empty or invalid base image name (line 2)
+#1 DONE 0.0s
+
+#2 [post-process-forwarder-transactions internal] load metadata for ghcr.io/sentry-arm/sentry:24.11.0
+#2 DONE 0.0s
+
+#3 [post-process-forwarder-transactions internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [post-process-forwarder-transactions 1/4] FROM ghcr.io/sentry-arm/sentry:24.11.0
+#4 DONE 0.0s
+
+#5 [post-process-forwarder-transactions internal] load build context
+#5 transferring context: 297B done
+#5 DONE 0.0s
+
+#6 [post-process-forwarder-transactions 2/4] COPY . /usr/src/sentry
+#6 CACHED
+
+#7 [post-process-forwarder-transactions 3/4] RUN if [ -s /usr/src/sentry/enhance-image.sh ]; then     /usr/src/sentry/enhance-image.sh; fi
+#7 CACHED
+
+#8 [post-process-forwarder-transactions 4/4] RUN if [ -s /usr/src/sentry/requirements.txt ]; then     echo "sentry/requirements.txt is deprecated, use sentry/enhance-image.sh - see https://develop.sentry.dev/self-hosted/#enhance-sentry-image";     pip install -r /usr/src/sentry/requirements.txt; fi
+#8 CACHED
+
+#9 [post-process-forwarder-transactions] exporting to image
+#9 exporting layers done
+#9 writing image sha256:264207fd162447ff6334cad6c1dd5438dd792f60640419afe6d5c6d74592df25 done
+#9 naming to docker.io/library/sentry-self-hosted-local done
+#9 DONE 0.0s
+
+#10 [post-process-forwarder-transactions] resolving provenance for metadata file
+#10 DONE 0.0s
+ post-process-forwarder-transactions  Built
+
+Docker images built.
+
+▶ Bootstrapping and migrating Snuba ...
+ Network sentry-self-hosted_default  Creating
+ Network sentry-self-hosted_default  Created
+ Container sentry-self-hosted-clickhouse-1  Creating
+ Container sentry-self-hosted-redis-1  Creating
+ Container sentry-self-hosted-kafka-1  Creating
+ Container sentry-self-hosted-clickhouse-1  Created
+ Container sentry-self-hosted-kafka-1  Created
+ Container sentry-self-hosted-redis-1  Created
+ Container sentry-self-hosted-redis-1  Starting
+ Container sentry-self-hosted-kafka-1  Starting
+ Container sentry-self-hosted-clickhouse-1  Starting
+ Container sentry-self-hosted-kafka-1  Started
+ Container sentry-self-hosted-redis-1  Started
+ Container sentry-self-hosted-clickhouse-1  Started
+2025-01-29 09:30:21,794 Initializing Snuba...
+2025-01-29 09:30:27,031 Snuba initialization took 5.237864013994113s
+2025-01-29 09:30:27,944 Initializing Snuba...
+2025-01-29 09:30:33,122 Snuba initialization took 5.179072208004072s
+2025-01-29 09:30:33,131 Attempting to connect to Kafka (attempt 0)...
+2025-01-29 09:30:33,167 Connected to Kafka on attempt 0
+2025-01-29 09:30:33,237 Creating Kafka topics...
+ Container sentry-self-hosted-redis-1  Running
+ Container sentry-self-hosted-kafka-1  Running
+ Container sentry-self-hosted-clickhouse-1  Running
+2025-01-29 09:30:35,348 Initializing Snuba...
+2025-01-29 09:30:40,609 Snuba initialization took 5.261698999966029s
+2025-01-29 09:30:41,555 Initializing Snuba...
+2025-01-29 09:30:46,951 Snuba initialization took 5.396277674997691s
+Finished running migrations
+
+▶ Ensuring proper PostgreSQL version ...
+
+▶ Setting up / migrating database ...
+ Container sentry-self-hosted-postgres-1  Creating
+ Container sentry-self-hosted-postgres-1  Created
+ Container sentry-self-hosted-postgres-1  Starting
+ Container sentry-self-hosted-postgres-1  Started
+ Container sentry-self-hosted-symbolicator-1  Creating
+ Container sentry-self-hosted-smtp-1  Creating
+ Container sentry-self-hosted-kafka-1  Running
+ Container sentry-self-hosted-clickhouse-1  Running
+ Container sentry-self-hosted-postgres-1  Running
+ Container sentry-self-hosted-redis-1  Running
+ Container sentry-self-hosted-memcached-1  Creating
+ Container sentry-self-hosted-snuba-api-1  Creating
+ Container sentry-self-hosted-memcached-1  Created
+ Container sentry-self-hosted-smtp-1  Created
+ Container sentry-self-hosted-snuba-api-1  Created
+ Container sentry-self-hosted-symbolicator-1  Created
+ Container sentry-self-hosted-symbolicator-1  Starting
+ Container sentry-self-hosted-memcached-1  Starting
+ Container sentry-self-hosted-clickhouse-1  Waiting
+ Container sentry-self-hosted-smtp-1  Starting
+ Container sentry-self-hosted-kafka-1  Waiting
+ Container sentry-self-hosted-redis-1  Waiting
+ Container sentry-self-hosted-memcached-1  Started
+ Container sentry-self-hosted-symbolicator-1  Started
+ Container sentry-self-hosted-smtp-1  Started
+ Container sentry-self-hosted-clickhouse-1  Healthy
+ Container sentry-self-hosted-redis-1  Healthy
+ Container sentry-self-hosted-kafka-1  Healthy
+ Container sentry-self-hosted-snuba-api-1  Starting
+ Container sentry-self-hosted-snuba-api-1  Started
+Updating certificates in /etc/ssl/certs...
+0 added, 0 removed; done.
+Running hooks in /etc/ca-certificates/update.d...
+done.
+ Container sentry-self-hosted-postgres-1  Running
+ Container sentry-self-hosted-clickhouse-1  Running
+ Container sentry-self-hosted-redis-1  Running
+ Container sentry-self-hosted-kafka-1  Running
+ Container sentry-self-hosted-smtp-1  Running
+ Container sentry-self-hosted-symbolicator-1  Running
+ Container sentry-self-hosted-memcached-1  Running
+ Container sentry-self-hosted-snuba-api-1  Running
+ Container sentry-self-hosted-clickhouse-1  Waiting
+ Container sentry-self-hosted-kafka-1  Waiting
+ Container sentry-self-hosted-redis-1  Waiting
+ Container sentry-self-hosted-redis-1  Healthy
+ Container sentry-self-hosted-clickhouse-1  Healthy
+ Container sentry-self-hosted-kafka-1  Healthy
+Updating certificates in /etc/ssl/certs...
+0 added, 0 removed; done.
+Running hooks in /etc/ca-certificates/update.d...
+done.
+Running migrations for default
+Operations to perform:
+  Apply all migrations: auth, contenttypes, feedback, flags, hybridcloud, nodestore, remote_subscriptions, replays, sentry, sessions, sites, social_auth, uptime, workflow_engine
+Running migrations:
+  No migrations to apply.
+Creating missing DSNs
+Correcting Group.num_comments counter
+09:31:14 [INFO] sentry.outboxes: Executing outbox replication backfill
+09:31:14 [INFO] sentry.outboxes: Processing sentry.ControlOutboxs...
+09:31:14 [INFO] sentry.outboxes: Processing sentry.RegionOutboxs...
+09:31:14 [INFO] sentry.outboxes: done
+
+Would you like to create a user account now? [Y/n]: 
+Run `sentry createuser` to do this later.
+
+
+▶ Setting up GeoIP integration ...
+Setting up IP address geolocation ...
+IP address geolocation database already exists.
+IP address geolocation is not configured for updates.
+See https://develop.sentry.dev/self-hosted/geolocation/ for instructions.
+Error setting up IP address geolocation.
+
+
+-----------------------------------------------------------------
+
+You're all done! Run the following command to get Sentry running:
+
+  docker compose up -d
+
+-----------------------------------------------------------------
+
