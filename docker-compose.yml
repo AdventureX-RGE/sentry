@@ -212,7 +212,6 @@ services:
         hard: 4096
     volumes:
       - "sentry-kafka:/var/lib/kafka/data"
-      - "sentry-kafka-log:/var/lib/kafka/log"
       - "sentry-secrets:/etc/kafka/secrets"
     healthcheck:
       <<: *healthcheck_defaults
@@ -574,8 +573,3 @@ services:
       - ../files/sentry-vroom:/var/lib/sentry-profiles
     profiles:
       - feature-complete
-
-volumes:
-  sentry-kafka:
-  sentry-kafka-log:
-  sentry-secrets:
