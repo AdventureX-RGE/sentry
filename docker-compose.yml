@@ -211,8 +211,8 @@ services:
         soft: 4096
         hard: 4096
     volumes:
-      - "sentry-kafka:/var/lib/kafka/data"
-      - "sentry-secrets:/etc/kafka/secrets"
+      - "../files/sentry-kafka:/var/lib/kafka/data"
+      - "../files/sentry-secrets:/etc/kafka/secrets"
     healthcheck:
       <<: *healthcheck_defaults
       test: ["CMD-SHELL", "nc -z localhost 9092"]
