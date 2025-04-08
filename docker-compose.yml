@@ -186,6 +186,7 @@ services:
   kafka:
     <<: *restart_policy
     image: "confluentinc/cp-kafka:7.6.1"
+    entrypoint: ["/bin/sh", "-c", "mkdir -p /var/lib/kafka/data && chown -R 1000:1000 /var/lib/kafka/data && /etc/confluent/docker/run"]
     environment:
       # https://docs.confluent.io/platform/current/installation/docker/config-reference.html#cp-kakfa-example
       KAFKA_PROCESS_ROLES: "broker,controller"
